@@ -1,0 +1,81 @@
+# macOS junk
+.DS_Store
+
+# Xcode build and user state
+DerivedData/
+xcuserdata/
+*.mobileprovision
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+profile
+
+# SwiftPM and local build artifacts
+.build/
+.swiftpm/
+.xcodebuild/
+.xcode_packages/
+build/
+
+# DocC build outputs
+.docc-build/
+.docc-derived/
+.docc-publish/
+
+# Carthage dependencies and build products
+Carthage/Carthage/Checkouts/*
+Carthage/Carthage/Build/*
+Carthage/Carthage/Build/iOS/*.bcsymbolmap
+
+# fastlane artifacts
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# Node and frontend tooling
+node_modules/
+.next/
+.vercel
+package-lock.json
+yarn.lock
+
+# Coverage outputs
+*.xccovreport
+*.xccovarchive
+*.lcov
+coverage/
+
+# Bundler and playgrounds
+.bundle
+timeline.xctimeline
+playground.xcworkspace
+
+# Editor and IDE
+.vscode/
+.idea/
+
+# Environment and secrets (never commit)
+.env
+.env.local
+.wrkstrm/secrets/*
+.clia/secrets/*
+
+# CLIA tooling outputs
+.clia/bin/**
+.clia/tmp/**
+**/.clia/tmp/**
+.clia/logs/xcodebuild/*
+
+# Wrkstrm tooling outputs
+.wrkstrm/foundry/
+.wrkstrm/tmp/**
+**/.wrkstrm/tmp/**
