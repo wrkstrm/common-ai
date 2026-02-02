@@ -3,9 +3,10 @@ import Foundation
 import PackageDescription
 
 let useLocalDeps: Bool = {
-  guard let raw = ProcessInfo.processInfo.environment["SPM_USE_LOCAL_DEPS"] else { return false }
+  // Default to local monorepo deps unless explicitly disabled.
+  guard let raw = ProcessInfo.processInfo.environment["SPM_USE_LOCAL_DEPS"] else { return true }
   let v = raw.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-  return v == "1" || v == "true" || v == "yes"
+  return !(v == "0" || v == "false" || v == "no")
 }()
 
 func localOrRemote(name: String, path: String, url: String, from version: Version) -> Package.Dependency {
@@ -44,7 +45,11 @@ let package = Package(
       path: "../../system/common-log",
       url: "https://github.com/swift-universal/common-log.git",
       from: "3.0.0"),
-    .package(name: "google-ai-swift", path: "../google-ai-swift"),
+    localOrRemote(
+      name: "google-ai-swift",
+      path: "../../../../../../../wrkstrm/public/spm/universal/domain/ai/google-ai-swift",
+      url: "https://github.com/wrkstrm/google-ai-swift.git",
+      from: "1.0.0"),
     // External dependencies
     .package(
       url: "https://github.com/dylanshine/openai-kit.git",
