@@ -1,0 +1,67 @@
+name: "📖 DocC | CommonAI"
+
+# NOTE: This workflow is intended for the standalone public repo where the package sits at repository root.
+# In this monorepo, GitHub does not execute workflows stored under subdirectories.
+# Keep this file here as the canonical, ready-to-run workflow to simplify mirroring/export.
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: docc-pages-common-ai
+  cancel-in-progress: true
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    container: swift:6.1-noble
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Generate DocC with swift-docc-plugin
+        shell: bash
+        env:
+          BASE_PATH: ${{ github.event.repository.name }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$GITHUB_WORKSPACE/_site"
+          swift package \
+            --allow-writing-to-directory "$GITHUB_WORKSPACE/_site" \
+            generate-documentation \
+            --target CommonAI \
+            --output-path "$GITHUB_WORKSPACE/_site" \
+            --transform-for-static-hosting \
+            --hosting-base-path "$BASE_PATH"
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
