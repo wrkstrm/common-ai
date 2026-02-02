@@ -32,12 +32,12 @@ let package = Package(
     // Local monorepo dependencies
     localOrRemote(
       name: "wrkstrm-foundation",
-      path: "../../../../../../../wrkstrm/spm/universal/domain/system/wrkstrm-foundation",
+      path: "../../../../../../../wrkstrm/public/spm/universal/domain/system/wrkstrm-foundation",
       url: "https://github.com/wrkstrm/wrkstrm-foundation.git",
       from: "3.0.0"),
     localOrRemote(
       name: "wrkstrm-networking",
-      path: "../../../../../../../wrkstrm/spm/universal/domain/system/wrkstrm-networking",
+      path: "../../../../../../../wrkstrm/public/spm/universal/domain/system/wrkstrm-networking",
       url: "https://github.com/wrkstrm/wrkstrm-networking.git",
       from: "3.0.0"),
     localOrRemote(
