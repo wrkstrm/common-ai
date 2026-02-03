@@ -42,7 +42,7 @@ let package = Package(
       from: "3.0.0"),
     localOrRemote(
       name: "common-log",
-      path: "../../system/common-log",
+      path: "../../../../../../../swift-universal/public/spm/universal/domain/system/common-log",
       url: "https://github.com/swift-universal/common-log.git",
       from: "3.0.0"),
     localOrRemote(
