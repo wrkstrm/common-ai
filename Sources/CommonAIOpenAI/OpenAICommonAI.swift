@@ -67,12 +67,6 @@ public final class OpenAICommonAIModel: @unchecked Sendable, CommonAIModel {
 
   static func makeOpenAIKitMessages(_ content: [CAIContent]) -> [Chat.Message] {
     content.flatMap { c -> [Chat.Message] in
-      let base: Chat.Message =
-        switch c.role {
-        case .user: .user(content: "")
-        case .system: .system(content: "")
-        case .model: .assistant(content: "")
-        }
       let text = c.parts.compactMap {
         guard case .text(let t) = $0 else { return nil }
         return t
