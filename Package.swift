@@ -49,7 +49,7 @@ let package = Package(
       name: "google-ai-swift",
       path: "../../../../../../../wrkstrm/public/spm/universal/domain/ai/google-ai-swift",
       url: "https://github.com/wrkstrm/google-ai-swift.git",
-      from: "1.0.0"),
+      from: "1.0.1"),
     // External dependencies
     .package(
       url: "https://github.com/dylanshine/openai-kit.git",
