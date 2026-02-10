@@ -3,10 +3,10 @@ import Foundation
 import PackageDescription
 
 let useLocalDeps: Bool = {
-  // Default to local monorepo deps unless explicitly disabled.
-  guard let raw = ProcessInfo.processInfo.environment["SPM_USE_LOCAL_DEPS"] else { return true }
+  // Default to remote deps unless explicitly enabled.
+  guard let raw = ProcessInfo.processInfo.environment["SPM_USE_LOCAL_DEPS"] else { return false }
   let v = raw.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-  return !(v == "0" || v == "false" || v == "no")
+  return v == "1" || v == "true" || v == "yes" || v == "on"
 }()
 
 func localOrRemote(name: String, path: String, url: String, from version: Version) -> Package.Dependency {
